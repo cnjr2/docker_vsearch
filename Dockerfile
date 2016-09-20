@@ -12,8 +12,8 @@ ENV PACKAGES wget make cmake gcc g++ autoconf libbz2-dev zlib1g-dev
 
 ########################### VSEARCH URLS #############################
 
-ENV VSEARCH_SOURCE https://github.com/torognes/vsearch/archive/v1.11.1.tar.gz
-ENV VSEARCH_DIR vsearch-1.11.1
+ENV VSEARCH_SOURCE https://github.com/torognes/vsearch/archive/v2.1.0.tar.gz
+ENV VSEARCH_DIR vsearch-2.1.0
 ENV DIR /opt
 
 ################## DEPENDENCIES INSTALLATION ######################
