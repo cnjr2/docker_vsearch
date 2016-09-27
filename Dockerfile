@@ -8,16 +8,16 @@ FROM debian:wheezy
 
 # Set noninterative mode
 ENV DEBIAN_FRONTEND noninteractive
-ENV PACKAGES wget make cmake gcc g++
+ENV PACKAGES wget make cmake gcc g++ autoconf libbz2-dev zlib1g-dev
 
 ########################### VSEARCH URLS #############################
 
-ENV VSEARCH_SOURCE https://github.com/torognes/vsearch/releases/download/v1.11.1/vsearch-1.11.1-linux-x86_64.tar.gz
-ENV VSEARCH_DIR vsearch-1.11.1-linux-x86_64
+ENV VSEARCH_SOURCE https://github.com/torognes/vsearch/archive/v2.1.0.tar.gz
+ENV VSEARCH_DIR vsearch-2.1.0
 ENV DIR /opt
 
 ################## DEPENDENCIES INSTALLATION ######################
-
+# RUN apt-get install -y build-essential libtool autotools-dev autoconf pkg-config libssl-dev
 RUN apt-get update -y
 RUN apt-get install -y ${PACKAGES}
 
@@ -27,7 +27,7 @@ WORKDIR ${DIR}
 RUN wget ${VSEARCH_SOURCE} -O - | tar xvzf -
 WORKDIR ${DIR}/${VSEARCH_DIR}
 
-RUN cp bin/vsearch /usr/local/bin/
+RUN ./autogen.sh && ./configure && make && make install
 
 WORKDIR /root
 
